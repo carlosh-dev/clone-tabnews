@@ -4,7 +4,10 @@
   "description": "A https://tabnews.com.br clone for study.",
   "main": "index.js",
   "scripts": {
-    "dev": "next dev",
+    "dev": "pnpm run services:up && next dev",
+    "services:up": "docker compose -f infra/docker-compose.yml up -d",
+    "services:down": "docker compose -f infra/docker-compose.yml down",
+    "services:stop": "docker compose -f infra/docker-compose.yml stop",
     "lint:check": "prettier --check .",
     "lint:fix": "prettier --write .",
     "test": "jest",
