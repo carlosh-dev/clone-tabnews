@@ -7,8 +7,8 @@ async function status(request, response) {
   const databateVersionResult = await database.query("SHOW server_version;");
   const version = databateVersionResult.rows[0].server_version;
   
-  const databateMaxConnextionsResult = await database.query("SHOW max_connections;");
-  const maxConnections = databateMaxConnextionsResult.rows[0].max_connections;
+  const databateMaxConnectionsResult = await database.query("SHOW max_connections;");
+  const maxConnections = databateMaxConnectionsResult.rows[0].max_connections;
 
   const databateOpennedConnextionsResult = await database.query("SELECT COUNT(*)::int FROM pg_stat_activity  WHERE datname = 'local_bd';");
   const databaseOpenConnectionsValue = databateOpennedConnextionsResult.rows[0].count;
