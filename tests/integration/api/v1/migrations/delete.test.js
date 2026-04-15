@@ -11,5 +11,10 @@ test("DELETE to /api/v1/migrations should not to be allowed", async () => {
 
   const responseBody = await response.json();
 
-  expect(responseBody.message).toBe(`Method "DELETE" now allowed!`);
+  expect(responseBody).toEqual({
+    name: "MethosNotAllowedError",
+    message: "Método não permitido para este endpoint.",
+    action: "Verifique se o método HTTP enviado é válido para este endpoint.",
+    statusCode: 405,
+  });
 });
