@@ -6,8 +6,6 @@ async function fetchAPI(key) {
   return responseBody;
 }
 
-// "dependecies":{"database":{"max_connections":100,"open_connections":1,"version":"16.2"}}
-
 export default function StatusPage() {
   return (
     <>
