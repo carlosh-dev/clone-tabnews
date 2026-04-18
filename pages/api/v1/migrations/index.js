@@ -2,7 +2,7 @@ import migrationRunner from "node-pg-migrate";
 import { resolve } from "node:path";
 import database from "infra/database.js";
 import { createRouter } from "next-connect";
-import { InternalServerError, MethosNotAllowedError } from "infra/errors";
+import controller from "infra/controllers";
 
 const defaultMigrationsOptions = {
   dryRun: true,
@@ -17,28 +17,7 @@ const router = createRouter();
 router.get(getHandler);
 router.post(postHandler);
 
-export default router.handler({
-  onNoMatch: onNoMatchHandler,
-  onError: onErrorHandler,
-});
-
-function onNoMatchHandler(request, response) {
-  const publicErrorObject = new MethosNotAllowedError();
-  response.status(publicErrorObject.statusCode).json(publicErrorObject);
-}
-
-function onErrorHandler(error, request, response) {
-  const customErrorObject = new InternalServerError({
-    cause: error,
-  });
-
-  console.log("\n Erro dentro do next-connect:");
-  console.log(customErrorObject);
-
-  response.status(500).json({
-    error: customErrorObject,
-  });
-}
+export default router.handler(controller.errorHandlers);
 
 async function getHandler(request, response) {
   let dbClient;
