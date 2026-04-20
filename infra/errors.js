@@ -38,7 +38,7 @@ export class ServiceError extends Error {
   }
 }
 
-export class MethosNotAllowedError extends Error {
+export class MethodNotAllowedError extends Error {
   constructor() {
     super("Método não permitido para este endpoint.");
     this.name = "MethosNotAllowedError";
