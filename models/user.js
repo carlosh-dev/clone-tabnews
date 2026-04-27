@@ -7,8 +7,6 @@ async function create(userInputValues) {
   await validadeUniqueUserName(userInputValues);
   await hashPasswordInObject(userInputValues);
 
-  console.log(userInputValues);
-
   const newUser = runInsertQuery(userInputValues);
 
   return newUser;
