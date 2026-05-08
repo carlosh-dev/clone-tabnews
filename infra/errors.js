@@ -98,3 +98,23 @@ export class NotFoundError extends Error {
     };
   }
 }
+
+export class UnauthorazedError extends Error {
+  constructor({ cause, message, action }) {
+    super(message || "Usuário não autenticado.", {
+      cause,
+    });
+    this.name = "UnauthorazedError";
+    this.action = action || "Faça o login novamente para continuar.";
+    this.statusCode = 401;
+  }
+
+  toJSON() {
+    return {
+      name: this.name,
+      message: this.message,
+      action: this.action,
+      statusCode: this.statusCode,
+    };
+  }
+}
